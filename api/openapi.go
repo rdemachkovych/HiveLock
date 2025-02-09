@@ -3,6 +3,7 @@ package api
 import (
 	"hivelock/internal/encryption"
 	"hivelock/internal/models"
+	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
@@ -25,7 +26,7 @@ func SetupRoutes(app *fiber.App, db *gorm.DB, encryptionKey string) {
 		}
 
 		secret := models.Secret{Key: body.Key, Value: []byte(encryptedValue)}
-		db.Create(&secret)
+		log.Fatal(db.Create(&secret))
 
 		return c.Status(201).JSON(fiber.Map{"message": "Secret stored successfully"})
 	})
