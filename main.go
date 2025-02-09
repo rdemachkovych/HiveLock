@@ -35,5 +35,5 @@ func main() {
 	// Set up API routes with the database instance and encryption key
 	api.SetupRoutes(app, db.DB, secretKey)
 
-	app.Listen(":8080")
+	log.Fatal(app.ListenTLS(":443", "./cert.pem", "./cert.key"))
 }
